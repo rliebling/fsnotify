@@ -133,6 +133,7 @@ func (w *Watcher) addWatch(path string, flags uint32) error {
 		if fd == -1 {
 			return errno
 		}
+		defer syscall.Close(fd)
 		watchfd = fd
 
 		w.watches[path] = watchfd
